@@ -1,0 +1,26 @@
+<!-- <div *ngFor="let services of ourServices; let i = index">
+  {{i+1}} - {{services}}
+</div> -->
+<h1 [ngClass]="currentClass">Our Services</h1>
+<button (click)="changeCssClass()">Change Title Class Dynamically</button>
+<button class="btn btn-success" (click)="toggleServices()">Toggle Services</button>
+<ul class="list-group" *ngIf="toggleServicesMenu" [ngStyle]="toggleStyle">
+  <li (click)="selectService(services)" class="list-group-item" *ngFor = "let services of ourServices; let i = index" appSytlechange bgColor="#FF6600">{{i+1}} - {{services}}</li>
+</ul>
+
+<div [ngSwitch]="selectedServices" [ngStyle]="myStyle">
+<div *ngSwitchCase="ourServices[0]">We bridge the IT talent demand-supply gap through an innovative, best recruiting, backed by a dedicated client-centric service and focused team.</div>
+<div *ngSwitchCase="ourServices[1]">Choosing to outsource your recruitment process will save your company money and improve your overall candidate hiring process. If done right, recruitment process outsourcing can have a lasting impact on your organization.</div>
+<div *ngSwitchCase="ourServices[2]">We partner with the industry to provide comprehensive Staff Augmentation. We offer a wide range of Staff Augmentation options to enable our clients to optimize their needs thereby reducing risk and the total cost of ownership </div>
+<div *ngSwitchCase="ourServices[3]">You can also avail our consultancy services to plan your short term and project based staffing requirements. If you are pleased with the performance of the temporary employees you may even decide to absorb them on to your company rolls</div>
+<div *ngSwitchCase="ourServices[4]">A key requirement for every organization is achieving the optimum balance between having the appropriate trained and skilled IT people available and minimizing recruitment, training, insurance and pension costs.</div>
+<div *ngSwitchCase="'Direct Placement'">Finding qualified talent to fill your permanent positions can be a complicated and time-consuming process. AAITE’s Direct Placement services include a vast network of technical talent that we help identify as a perfect match for your organization.</div>
+
+</div>
+
+<button class="btn btn-warning" (click)="setStyle()"> Change Style </button>
+<button class="btn btn-info" (click)="newStyle()"> New Style </button>
+
+<hr />
+<h2 [style.color]="inputColor">Change Color using the NgModel</h2>
+<input type="color" [(ngModel)] = "inputColor" >
