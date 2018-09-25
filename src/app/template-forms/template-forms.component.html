@@ -1,3 +1,97 @@
-<p>
-  template-forms works!
-</p>
+<form #myFrm="ngForm" (ngSubmit)="addDetails(myFrm)">
+  <div class="container-fluid">
+  <div class="row">
+<div class="jumbotron col-md-6">
+  <h2 class="text-info">Template Driven Form</h2>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text"
+     class="form-control" 
+     ngModel 
+     required
+     #nameUser="ngModel"
+     pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+     name="name">
+     <div  *ngIf="nameUser.touched">
+       <div *ngIf="nameUser.errors?.required" class="alert-danger">
+       Name Required</div>
+     </div>
+     <div *ngIf="nameUser.errors?.pattern"  class="alert-danger">
+       Name is Invalid
+     </div>
+  </div>
+
+  <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text"
+       class="form-control"
+       ngModel
+       required
+       #emailUser="ngModel"
+       pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,4}$"
+        name="email">
+        <div *ngIf="emailUser.touched">
+        <div class="alert-danger" *ngIf="emailUser.errors?.required">
+          Email Required
+        </div>
+        <div class="alert-danger" *ngIf="emailUser.errors?.pattern">Invalid Email</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label for="mobile">Mobile</label>
+        <input type="text"
+         class="form-control" minlength="10" maxlength="10"
+         ngModel
+         required
+         #mobileUser="ngModel"
+         pattern="^[0-9]+$"
+          name="mobile">
+          <div *ngIf="mobileUser.touched">
+          <div class="alert-danger" *ngIf="mobileUser.errors?.required">
+            Mobile Required</div>
+            <div class="alert-danger" *ngIf="mobileUser.errors?.pattern || mobileUser.errors?.minlength">
+              Invalid Mobile Number
+            </div>
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="desc">Description</label>
+          <input type="text"
+           class="form-control"
+           ngModel
+           required
+           #descUser="ngModel"
+            name="desc">
+            <div  *ngIf="descUser.touched">
+              <div *ngIf="descUser.errors?.required" class="alert alert-danger">
+              Description Required</div>
+
+              <!-- <div [hidden]="!descUser?.hasErrors('required')" class="alert alert-danger">
+                  Description Required</div> -->
+            </div>
+        </div>
+
+        <button class="btn btn-success" type="submit" [disabled]='myFrm.invalid'>Submit</button>
+</div>
+<div class="col-md-6">
+  <table class="table table-responsive table-striped">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Mobile</th>
+      <th>Description</th>
+    </tr>
+    <tr *ngFor="let detail of detailsList">
+      <td>{{ detail.name }}</td>
+      <td>{{ detail.email }}</td>
+      <td>{{ detail.mobile }}</td>
+      <td>{{ detail.desc }}</td>
+    </tr>
+  </table>
+
+</div>
+</div></div>
+</form>
+
